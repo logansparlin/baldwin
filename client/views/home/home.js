@@ -20,6 +20,7 @@ Template.home.onRendered(function() {
 
 				init: function() {
 					this.setPosition();
+					this.resize();
 				},
 
 				setPosition: function() {
@@ -67,14 +68,17 @@ Template.home.onRendered(function() {
 							console.log('previous')
 						}
 					}
+				},
+
+				resize: function() {
+					$(window).resize(function() {
+						this.setPosition();
+					})
 				}
+
 			}
 
 			hero.init()
-
-			$(window).resize(function() {
-				hero.init()
-			})
 
 		})();
 	})
