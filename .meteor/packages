@@ -1,0 +1,24 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+standard-app-packages
+meteor-platform
+jnoble:multi-styl
+meteorhacks:fast-render
+iron:router
+infinitedg:gsap
+accounts-base
+accounts-password
+aldeed:simple-schema
+aldeed:collection2
+reactive-var
+meteorhacks:kadira-debug
+cfs:standard-packages
+cfs:s3
+fortawesome:fontawesome
+mrt:jquery-imagesloaded
+fastclick
+http

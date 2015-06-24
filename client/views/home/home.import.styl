@@ -1,0 +1,54 @@
+.landing
+	width 100%
+	height 100%
+	position relative
+
+.hero-container
+	width auto
+	height 100%
+	position absolute
+	left 0
+	right 0
+.hero 
+	width 100%
+	height 100%
+	top 0
+	left 0
+	bottom 0
+	right 0
+	cursor grab
+	position absolute
+	&:active
+		cursor move
+.hero__mens-collection
+	background url('../img/BALDWIN_MEN_COLLECTION.jpg') no-repeat 10% center
+	background-size cover
+.hero__womens-collection
+	background url('../img/BALDWIN_WOMENS_COLLECTION.jpg') no-repeat center center
+	background-size cover
+	
+	
+.tri-bars 
+	display block
+	width 600px
+	height 45px
+	display flex
+	position absolute
+	top 50%
+	left 50%
+	transform translate(-50%, -50%)
+	.tri-bar-container
+		flex-grow 1 
+		flex-direction row
+		position relative
+		margin 0 10px
+		.tri-bar 
+			display block 
+			width 100%
+			height 2px 
+			background black
+			position absolute
+			&:nth-of-type(2)
+				top calc(50% - 1px)
+			&:nth-of-type(3)
+				bottom 0
