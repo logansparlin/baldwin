@@ -35,7 +35,8 @@ Template.home.onRendered(function() {
 				},
 
 				drag: function() {
-					container.on('mousedown', function(e) {
+					container.on('mousedown', function(e) {	
+						container.css({'transition': 'none'})
 						var startX = hero.index == 1 ? e.pageX : e.pageX + parseInt((hero.index - 1) * wx);
 						$(this).on('mousemove', function(e) {
 							position = hero.index == 1 ? startX - e.pageX : (startX - (e.pageX + parseInt((hero.index - 1) * wx))) + parseInt((hero.index - 1) * wx);
@@ -62,11 +63,20 @@ Template.home.onRendered(function() {
 							container.css({
 								'transform': 'translate3d(' + -(wx * hero.index) + 'px, 0, 0)',
 								'transition':'transform 400ms ease-out'
-							})
+							});
 							hero.index += 1;
 						} else if(position <= -(wx / 4)) {
 							// Previous
+							container.css({
+								'transform': 'translate3d(' + (wx * hero.index) + 'px, 0, 0)',
+								'transition':'transform 400ms ease-out'
+							})
 							// console.log('previous')
+						} else {
+							container.css({
+								'transform': 'translate3d(' + -(wx * (hero.index - 1)) + 'px, 0, 0)',
+								'transition':'transform 400ms ease-out'
+							})
 						}
 						console.log(hero.index)
 						sliding = false;
