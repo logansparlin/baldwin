@@ -12,7 +12,9 @@ Template.home.onRendered(function() {
 
 			var dragging = false,
 				container = $('.hero-container'),
-				wx = $(window).width();
+				wx = $(window).width(),
+				position,
+				sliding;
 
 			var hero = {
 
@@ -34,12 +36,11 @@ Template.home.onRendered(function() {
 
 				drag: function() {
 					container.on('mousedown', function(e) {
-						var startX = e.pageX;
+						var startX = hero.index == 1 ? e.pageX : e.pageX + parseInt((hero.index - 1) * wx);
 						$(this).on('mousemove', function(e) {
-							console.log(hero.index)
-							position = (startX - e.pageX) * hero.index;
+							position = hero.index == 1 ? startX - e.pageX : (startX - (e.pageX + parseInt((hero.index - 1) * wx))) + parseInt((hero.index - 1) * wx);
 							dragging = true;
-							// console.log(position)
+							sliding = true;
 							$(this).css({
 								"transform":"translate3d(" + (-position) + "px, 0, 0)",
 								"color":"green"
@@ -55,24 +56,26 @@ Template.home.onRendered(function() {
 
 				setSlide: function() {
 					var currentIndex = hero.index;
-					if(!dragging) {
+					if(!dragging && sliding) {
 						if(position >= (wx / 4)) {
 							// Next
 							container.css({
-								'transform': 'translate3d(' + wx * $(this).index() + 'px, 0, 0)',
+								'transform': 'translate3d(' + -(wx * hero.index) + 'px, 0, 0)',
 								'transition':'transform 400ms ease-out'
 							})
-							hero.index += currentIndex;
+							hero.index += 1;
 						} else if(position <= -(wx / 4)) {
 							// Previous
-							console.log('previous')
+							// console.log('previous')
 						}
+						console.log(hero.index)
+						sliding = false;
 					}
 				},
 
 				resize: function() {
 					$(window).resize(function() {
-						this.setPosition();
+						hero.setPosition();
 					})
 				}
 
@@ -82,4 +85,5 @@ Template.home.onRendered(function() {
 
 		})();
 	})
+
 });
