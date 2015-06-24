@@ -12,10 +12,11 @@ Template.home.onRendered(function() {
 
 			var dragging = false,
 				container = $('.hero-container'),
-				wx = $(window).width(),
-				index = $('.hero').length;
+				wx = $(window).width();
 
 			var hero = {
+
+				index:1,
 
 				init: function() {
 					this.setPosition();
@@ -34,7 +35,8 @@ Template.home.onRendered(function() {
 					container.on('mousedown', function(e) {
 						var startX = e.pageX;
 						$(this).on('mousemove', function(e) {
-							position = startX - e.pageX;
+							console.log(hero.index)
+							position = (startX - e.pageX) * hero.index;
 							dragging = true;
 							// console.log(position)
 							$(this).css({
@@ -51,10 +53,17 @@ Template.home.onRendered(function() {
 				},
 
 				setSlide: function() {
+					var currentIndex = hero.index;
 					if(!dragging) {
 						if(position >= (wx / 4)) {
-							console.log('next')
+							// Next
+							container.css({
+								'transform': 'translate3d(' + wx * $(this).index() + 'px, 0, 0)',
+								'transition':'transform 400ms ease-out'
+							})
+							hero.index += currentIndex;
 						} else if(position <= -(wx / 4)) {
+							// Previous
 							console.log('previous')
 						}
 					}
