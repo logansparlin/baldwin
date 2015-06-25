@@ -26,9 +26,11 @@ Template.home.onRendered(function() {
 				},
 
 				setPosition: function() {
+					wx = $(window).width();
 					for(var i = 0; i<count; i++) {
 						$('.hero').eq(i).css({
-							'left': wx * i
+							'left': wx * i,
+							'width': wx
 						})
 					}
 					this.drag();
@@ -63,7 +65,8 @@ Template.home.onRendered(function() {
 							// Next
 							container.css({
 								'transform': 'translate3d(' + -(wx * hero.index) + 'px, 0, 0)',
-								'transition':'transform 400ms ease-out'
+								'transition':'transform 600ms ease-out',
+								'transition-timing-function': 'cubic-bezier(0.39, 0.575, 0.565, 1)'
 							});
 							hero.index += 1;
 						} else if(-position <= parseInt((hero.index - 1) * wx) + 200) {
@@ -71,16 +74,17 @@ Template.home.onRendered(function() {
 							console.log('previous')
 							container.css({
 								'transform': 'translate3d(' + -(wx * (hero.index - 2)) + 'px, 0, 0)',
-								'transition':'transform 400ms ease-out'
+								'transition':'transform 600ms ease-out',
+								'transition-timing-function': 'cubic-bezier(0.39, 0.575, 0.565, 1)'
 							})
 							hero.index -= 1;
 						} else {
 							container.css({
 								'transform': 'translate3d(' + -(wx * (hero.index - 1)) + 'px, 0, 0)',
-								'transition':'transform 400ms ease-out'
+								'transition':'transform 600ms ease-out',
+								'transition-timing-function': 'cubic-bezier(0.39, 0.575, 0.565, 1)'
 							})
 						}
-						console.log(hero.index)
 						sliding = false;
 					}
 				},
