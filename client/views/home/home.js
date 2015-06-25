@@ -43,7 +43,7 @@ Template.home.onRendered(function() {
 							dragging = true;
 							sliding = true;
 							$(this).css({
-								"transform":"translate3d(" + (-position) + "px, 0, 0)",
+								"transform":"translate3d(" + (-((position / 2) + (parseInt((hero.index - 1) * wx) / hero.index))) + "px, 0, 0)",
 								"color":"green"
 							})
 						})
@@ -58,20 +58,22 @@ Template.home.onRendered(function() {
 				setSlide: function() {
 					var currentIndex = hero.index;
 					if(!dragging && sliding) {
-						if(position >= (wx / 4)) {
+						if(position >= parseInt((hero.index - 1) * wx) + 200) {
+							console.log('next')
 							// Next
 							container.css({
 								'transform': 'translate3d(' + -(wx * hero.index) + 'px, 0, 0)',
 								'transition':'transform 400ms ease-out'
 							});
 							hero.index += 1;
-						} else if(position <= -(wx / 4)) {
+						} else if(-position <= parseInt((hero.index - 1) * wx) + 200) {
 							// Previous
+							console.log('previous')
 							container.css({
-								'transform': 'translate3d(' + (wx * hero.index) + 'px, 0, 0)',
+								'transform': 'translate3d(' + -(wx * (hero.index - 2)) + 'px, 0, 0)',
 								'transition':'transform 400ms ease-out'
 							})
-							// console.log('previous')
+							hero.index -= 1;
 						} else {
 							container.css({
 								'transform': 'translate3d(' + -(wx * (hero.index - 1)) + 'px, 0, 0)',
