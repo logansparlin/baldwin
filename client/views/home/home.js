@@ -8,7 +8,7 @@ Template.home.onRendered(function() {
 	this.autorun(function() {
 		var count = Sections.find().count();
 
-		(function() {
+		var app = (function() {
 
 			var dragging = false,
 				container = $('.hero-container'),
